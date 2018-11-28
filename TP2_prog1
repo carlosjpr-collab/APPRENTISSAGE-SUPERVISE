@@ -9,16 +9,15 @@ import matplotlib.pyplot as plt
 
 mnist = datasets.fetch_mldata('MNIST original')
 
-
 train_data, test_data, train_labels, test_labels = train_test_split(mnist.data, mnist.target)
 # several 28x28 images, we’ll have several vectors that are all length 784 (28*28=784)
 #-- 52500 images, each 28x28 pixels
-print("Training data shape: ", train_labels.shape)
-
+print("Training data label shape: ", train_labels.shape)
 #-- 17500 images, each 28x28 pixels
-print("Test data shape ",test_data.shape)
+print("Training data shape ",train_data.shape)
+
 plt.imshow(train_data[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
-plt.imshow(train_labels[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
+#plt.imshow(train_labels[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
 
 plt.show()
 # clf=MLPClassifier(hidden_layer_sizes=(500),max_iter=30,alpha=0.0001,solver='sgd',verbose=True)
