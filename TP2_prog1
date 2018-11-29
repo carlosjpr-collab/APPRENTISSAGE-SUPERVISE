@@ -1,25 +1,85 @@
 # using shape to get the dimension of array
 # using shape to change the dimension of original array
 # using reshape to change the dimission of the array without changing original data
-from sklearn import datasets
+from sklearn import datasets, metrics
+from sklearn.metrics import accuracy_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import precision_score
 import matplotlib.pyplot as plt
-
 mnist = datasets.fetch_mldata('MNIST original')
+train_data, test_data, train_labels, test_labels = train_test_split(mnist.data, mnist.target,test_size=0.2)
+#Construire un modèle de classification ayant comme paramètre
+clf=MLPClassifier(hidden_layer_sizes=(50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+#fitting (training)
+clf.fit(train_data,train_labels)
+#the model can predict labels for new samples:
+predict = clf.predict(test_data)
+print(predict[4])
+plt.imshow(test_data[4].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
+plt.show()
+#calculez la précession du classifieur
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
 
-train_data, test_data, train_labels, test_labels = train_test_split(mnist.data, mnist.target)
+
+#Varier le nombre de la couches de 1 entre (2 et 100) couches, et recalculer la précision du classifieur.
+
+#2
+clfM2Couche=MLPClassifier(hidden_layer_sizes=(2),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM2Couche.fit(train_data,train_labels)
+predict = clfM2Couche.predict(test_data)
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
+#30
+clfM30Couche=MLPClassifier(hidden_layer_sizes=(30),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM30Couche.fit(train_data,train_labels)
+predict = clfM30Couche.predict(test_data)
+
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
+#60
+clfM60Couche=MLPClassifier(hidden_layer_sizes=(60),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM60Couche.fit(train_data,train_labels)
+predict = clfM60Couche.predict(test_data)
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
+
+#80
+clfM80Couche=MLPClassifier(hidden_layer_sizes=(80),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM80Couche.fit(train_data,train_labels)
+predict = clfM80Couche.predict(test_data)
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
+
+#100
+clfM100Couche=MLPClassifier(hidden_layer_sizes=(100),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM100Couche.fit(train_data,train_labels)
+predict = clf.predict(test_data)
+print("Training set score: %f" % clf.score(train_data, train_labels))
+print("Test set score: %f" % clf.score(test_data, test_labels))
+
+
+#Construire cinq modèles de classification des données mnist
+"""clfM1=MLPClassifier(hidden_layer_sizes=(10,20,30),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM2=MLPClassifier(hidden_layer_sizes=(20,20,50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM3=MLPClassifier(hidden_layer_sizes=(50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM4=MLPClassifier(hidden_layer_sizes=(50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM5=MLPClassifier(hidden_layer_sizes=(50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+
+#Étudier la convergence des algorithmes d’optimisation disponibles : L-BFGS, SGD et Adam
+
+
+#Varier les fonctions d’activation {‘identity’, ‘logistic’, ‘tanh’, ‘relu’}.
+
+
+
 # several 28x28 images, we’ll have several vectors that are all length 784 (28*28=784)
 #-- 52500 images, each 28x28 pixels
-print("Training data label shape: ", train_labels.shape)
+#print("Training data label shape: ", train_labels.shape)
 #-- 17500 images, each 28x28 pixels
-print("Training data shape ",train_data.shape)
+#print("Training data shape ",train_data.shape)
 
-plt.imshow(train_data[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
+#plt.imshow(train_data[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
 #plt.imshow(train_labels[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
-
-plt.show()
-# clf=MLPClassifier(hidden_layer_sizes=(500),max_iter=30,alpha=0.0001,solver='sgd',verbose=True)
-# clf.fit(train_data,train_labels)
-# clf.predict()
+#plt.show()
+"""
