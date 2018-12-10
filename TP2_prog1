@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 mnist = datasets.fetch_mldata('MNIST original')
 train_data, test_data, train_labels, test_labels = train_test_split(mnist.data, mnist.target,test_size=0.2)
 #Construire un modèle de classification ayant comme paramètre : hidden_layer_sizes = (50), puis calculez la précession du classifieur ;
+"""
 clf=MLPClassifier(hidden_layer_sizes=(50),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
 #fitting (training)
 clf.fit(train_data,train_labels)
@@ -17,37 +18,41 @@ plt.show()
 #calculez la précession du classifieur
 print("Training set score: %f" % clf.score(train_data, train_labels))
 print("Test set score: %f" % clf.score(test_data, test_labels))
+
+
 #Varier le nombre de la couches de 1 entre (2 et 100) couches, et recalculer la précision du classifieur.
 #2
-clfM2Couche=MLPClassifier(hidden_layer_sizes=(2),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM2Couche=MLPClassifier(hidden_layer_sizes=(2),max_iter=100,alpha=0.0001,solver='sgd',verbose=False)
 clfM2Couche.fit(train_data,train_labels)
 predict2Couche = clfM2Couche.predict(test_data)
 print("Training set score 2: %f" % clfM2Couche.score(train_data, train_labels))
 print("Test set score 2: %f" % clfM2Couche.score(test_data, test_labels))
 #30
-clfM30Couche=MLPClassifier(hidden_layer_sizes=(30),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM30Couche=MLPClassifier(hidden_layer_sizes=(30),max_iter=100,alpha=0.0001,solver='sgd',verbose=False)
 clfM30Couche.fit(train_data,train_labels)
 predict30Couche = clfM30Couche.predict(test_data)
-print("Training set score 30: %f" % clf.score(train_data, train_labels))
-print("Test set score 30: %f" % clf.score(test_data, test_labels))
+print("Training set score 30: %f" % clfM30Couche.score(train_data, train_labels))
+print("Test set score 30: %f" % clfM30Couche.score(test_data, test_labels))
 #60
-clfM60Couche=MLPClassifier(hidden_layer_sizes=(60),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM60Couche=MLPClassifier(hidden_layer_sizes=(60),max_iter=100,alpha=0.0001,solver='sgd',verbose=False)
 clfM60Couche.fit(train_data,train_labels)
 predict60Couche = clfM60Couche.predict(test_data)
 print("Training set score 60: %f" % clfM60Couche.score(train_data, train_labels))
 print("Test set score 60: %f" % clfM60Couche.score(test_data, test_labels))
 #80
-clfM80Couche=MLPClassifier(hidden_layer_sizes=(80),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM80Couche=MLPClassifier(hidden_layer_sizes=(80),max_iter=100,alpha=0.0001,solver='sgd',verbose=False)
 clfM80Couche.fit(train_data,train_labels)
 predict80Couche = clfM80Couche.predict(test_data)
 print("Training set score 80: %f" % clfM80Couche.score(train_data, train_labels))
 print("Test set score 80: %f" % clfM80Couche.score(test_data, test_labels))
 #100
-clfM100Couche=MLPClassifier(hidden_layer_sizes=(100),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
+clfM100Couche=MLPClassifier(hidden_layer_sizes=(100),max_iter=100,alpha=0.0001,solver='sgd',verbose=False)
 clfM100Couche.fit(train_data,train_labels)
 predict10Couche = clfM100Couche.predict(test_data)
 print("Training set score 100: %f" % clfM100Couche.score(train_data, train_labels))
 print("Test set score 100: %f" % clfM100Couche.score(test_data, test_labels))
+
+
 #Construire cinq modèles de classification des données mnist
 clfM1=MLPClassifier(hidden_layer_sizes=(20,20),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
 clfM2=MLPClassifier(hidden_layer_sizes=(53,85,20),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
@@ -55,6 +60,7 @@ clfM3=MLPClassifier(hidden_layer_sizes=(20,50,20,50,38),max_iter=50,alpha=0.0001
 clfM4=MLPClassifier(hidden_layer_sizes=(35,50,20,20,44,34,20,20),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
 clfM5=MLPClassifier(hidden_layer_sizes=(20,89,20,107,20,20,60,20,21,20),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
 #Étudier la convergence des algorithmes d’optimisation disponibles : L-BFGS, SGD et Adam
+"""
 #SGD
 clfM3=MLPClassifier(hidden_layer_sizes=(20,50,20,50,38),max_iter=50,alpha=0.0001,solver='sgd',verbose=False)
 start=time.time()
@@ -87,7 +93,7 @@ print(" M3-Adam Temps d’apprentissage: %f" % (end-start))
 print(" M3-Adam Erreur avec le package metrics.zero_one_loss: %f" % zero_one_loss(test_labels,predictClfM3))
 #Varier les fonctions d’activation {‘identity’, ‘logistic’, ‘tanh’, ‘relu’}.
 #identity
-clfM3=MLPClassifier(hidden_layer_sizes=(20,50,20,50,38),max_iter=50,alpha=0.0001,solver='sgd',verbose=False, activation="identity")
+clfM3=MLPClassifier(hidden_layer_sizes=(20,50,20,50,38),max_iter=1000,alpha=0.0001,solver='sgd',verbose=False, activation="identity")
 start=time.time()
 clfM3.fit(train_data,train_labels)
 end=time.time()
@@ -116,24 +122,3 @@ print(" M3-SGD-tanh Training set score 100: %f" % clfM3.score(train_data, train_
 print(" M3-SGD-tanh Test set score 100: %f" % clfM3.score(test_data, test_labels))
 print(" M3-SGD-tanh Temps d’apprentissage: %f" % (end-start))
 print(" M3-SGD-tanh Erreur avec le package metrics.zero_one_loss: %f" % zero_one_loss(test_labels,predictClfM3))
-"""
-#Changer la valeur de la régularisation L2 (paramètre α).
-
-Sur chacun des cas précédents, tracez les différentes courbes d'erreurs.
-o Temps d’apprentissage,
-o Précision, rappel
-o Erreur avec le package metrics.zero_one_loss(ytest, ypredTest).
-A votre avis, quels sont les avantages et les inconvénients des A-nn :
-optimalité ? temps de calcul ? passage à l'échelle ?
-
-
-# several 28x28 images, we’ll have several vectors that are all length 784 (28*28=784)
-#-- 52500 images, each 28x28 pixels
-#print("Training data label shape: ", train_labels.shape)
-#-- 17500 images, each 28x28 pixels
-#print("Training data shape ",train_data.shape)
-
-#plt.imshow(train_data[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
-#plt.imshow(train_labels[1].reshape(28,28),cmap=plt.cm.gray_r,interpolation="nearest")
-#plt.show()
-"""
